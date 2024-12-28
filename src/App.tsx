@@ -1,14 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import { AboutPage, HomePage, NotFoundPage } from "@src/pages";
 import { NavigationHeader } from "@src/templates";
-import { createTheme, CssBaseline, ThemeProvider } from "@mui/material";
-
-const theme = createTheme({
-  colorSchemes: {
-    dark: true,
-    light: true,
-  },
-});
+import { CssBaseline, ThemeProvider } from "@mui/material";
+import { theme } from "@src/theme";
 
 const App = () => {
   return (
