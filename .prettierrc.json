@@ -1,10 +1,10 @@
 {
   "tabWidth": 2,
   "useTabs": false,
-  "printWidth": 120,
+  "printWidth": 80,
   "singleQuote": false,
   "jsxSingleQuote": false,
-  "semi": false,
+  "semi": true,
   "trailingComma": "es5",
   "arrowParens": "avoid"
 }

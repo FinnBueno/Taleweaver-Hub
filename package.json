@@ -8,9 +8,11 @@
     "build": "tsc -b && vite build",
     "lint": "prettier . --check && eslint .",
     "format": "prettier . --write",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "validate-eslint": "eslint-config-prettier ./eslint.config.js"
   },
   "dependencies": {
+    "eslint-config-prettier": "^9.1.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
