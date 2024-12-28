@@ -1,21 +1,16 @@
-import { createTheme } from "@mui/material";
-import { darkPalette, lightPalette, mainPalette } from "./palettes";
+import { defaultTheme } from "@xstyled/styled-components";
 
-export const theme = createTheme({
-  palette: mainPalette,
-  colorSchemes: {
-    light: {
-      palette: lightPalette,
-    },
-    dark: {
-      palette: darkPalette,
-    },
-  },
-  components: {
-    MuiButtonBase: {
-      defaultProps: {
-        disableRipple: true,
+export const theme = {
+  ...defaultTheme,
+  defaultColorModeTheme: "dark",
+  colors: {
+    ...defaultTheme.colors,
+    backdrop: "#262e37",
+    text: "#000",
+    modes: {
+      dark: {
+        text: "#fff",
       },
     },
   },
-});
+};

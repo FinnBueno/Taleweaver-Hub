@@ -1,3 +1,1 @@
-import { PaletteOptions } from "@mui/material";
-
-export const darkPalette: PaletteOptions = {};
+export const darkPalette = {};
