@@ -7,6 +7,7 @@ import {
   BordersProps,
   ColorProps,
   SizingProps,
+  EffectsProps,
 } from "@xstyled/system";
 
 type Props = SpaceProps &
@@ -14,6 +15,7 @@ type Props = SpaceProps &
   BackgroundsProps &
   BordersProps &
   ColorProps &
+  EffectsProps &
   SizingProps;
 
 export const Box = ({ children, ...props }: WithChildren<Props>) => {

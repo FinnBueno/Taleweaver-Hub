@@ -7,17 +7,25 @@ import {
   BordersProps,
   ColorProps,
   SizingProps,
+  TransformsProps,
+  GridsProps,
+  EffectsProps,
 } from "@xstyled/system";
+
+type AlignmentValues = "start" | "center" | "end" | "between" | "around";
 
 type Props = SpaceProps &
   FlexboxesProps &
   BackgroundsProps &
   BordersProps &
   ColorProps &
+  TransformsProps &
+  GridsProps &
+  EffectsProps &
   SizingProps & {
-    direction?: "row" | "column";
-    alignH?: "start" | "center" | "end";
-    alignV?: "start" | "center" | "end";
+    column?: boolean;
+    alignH?: AlignmentValues;
+    alignV?: AlignmentValues;
   };
 
 type FlexProperties = {
@@ -28,7 +36,7 @@ type FlexProperties = {
 
 export const Flex = ({
   children,
-  direction = "column",
+  column = false,
   alignH,
   alignV,
   ...props
@@ -36,22 +44,17 @@ export const Flex = ({
   const flexProperties: FlexProperties = {
     alignItems: undefined,
     justifyContent: undefined,
-    flexDirection: direction,
+    flexDirection: column ? "column" : "row",
   };
-  flexProperties.alignItems = toFlexValues(
-    direction === "column" ? alignH : alignV
-  );
-  flexProperties.justifyContent = toFlexValues(
-    direction === "column" ? alignV : alignH
-  );
-  console.log({ flexProperties });
+  flexProperties.alignItems = toFlexValues(column ? alignH : alignV);
+  flexProperties.justifyContent = toFlexValues(column ? alignV : alignH);
   return (
-    <x.div display="flex" {...props} {...flexProperties}>
+    <x.div display="flex" {...flexProperties} {...props}>
       {children}
     </x.div>
   );
 };
-function toFlexValues(alignV?: "start" | "center" | "end"): string | undefined {
+function toFlexValues(alignV?: AlignmentValues): string | undefined {
   if (!alignV) return undefined;
   switch (alignV) {
     case "start":
@@ -60,5 +63,9 @@ function toFlexValues(alignV?: "start" | "center" | "end"): string | undefined {
       return "center";
     case "end":
       return "flex-end";
+    case "between":
+      return "space-between";
+    case "around":
+      return "space-around";
   }
 }
