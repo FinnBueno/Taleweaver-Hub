@@ -1,17 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router";
 import { AboutPage, HomePage, NotFoundPage } from "@src/pages";
-import { NavigationContainer } from "@src/templates";
+import { PageWithHeader } from "@src/templates";
 import { theme } from "@src/theme";
 import {
   ColorModeProvider,
   Preflight,
   ThemeProvider,
   createGlobalStyle,
+  useColorMode,
 } from "@xstyled/styled-components";
 
 const GlobalStyles = createGlobalStyle`
 :root {
-  background-color: backdrop;
   color-scheme: dark light;
 }
 
@@ -28,7 +28,7 @@ const App = () => {
         <GlobalStyles />
         <BrowserRouter>
           <Routes>
-            <Route element={<NavigationContainer />}>
+            <Route element={<PageWithHeader />}>
               <Route index element={<HomePage />} />
               <Route path="about" element={<AboutPage />} />
               <Route path="*" element={<NotFoundPage />} />

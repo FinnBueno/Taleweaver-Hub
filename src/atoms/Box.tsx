@@ -8,6 +8,10 @@ import {
   ColorProps,
   SizingProps,
   EffectsProps,
+  LayoutProps,
+  TransitionsProps,
+  TransformsProps,
+  InteractivityProps,
 } from "@xstyled/system";
 
 type Props = SpaceProps &
@@ -16,7 +20,13 @@ type Props = SpaceProps &
   BordersProps &
   ColorProps &
   EffectsProps &
-  SizingProps;
+  SizingProps &
+  LayoutProps &
+  TransitionsProps &
+  TransformsProps &
+  InteractivityProps & {
+    onClick?: () => void;
+  };
 
 export const Box = ({ children, ...props }: WithChildren<Props>) => {
   return <x.div {...props}>{children}</x.div>;

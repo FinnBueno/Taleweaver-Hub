@@ -12,7 +12,11 @@ import {
   EffectsProps,
 } from "@xstyled/system";
 
-type AlignmentValues = "start" | "center" | "end" | "between" | "around";
+type AlignmentValue = "start" | "center" | "end" | "between" | "around";
+type ScreenSize = "_" | "xs" | "sm" | "md" | "lg" | "xl";
+type AlignmentConfiguration = {
+  [key in ScreenSize]?: AlignmentValue;
+};
 
 type Props = SpaceProps &
   FlexboxesProps &
@@ -24,13 +28,13 @@ type Props = SpaceProps &
   EffectsProps &
   SizingProps & {
     column?: boolean;
-    alignH?: AlignmentValues;
-    alignV?: AlignmentValues;
+    alignH?: AlignmentConfiguration | AlignmentValue;
+    alignV?: AlignmentConfiguration | AlignmentValue;
   };
 
 type FlexProperties = {
-  alignItems: undefined | string;
-  justifyContent: undefined | string;
+  alignItems: undefined | string | { [key: string]: string };
+  justifyContent: undefined | string | { [key: string]: string };
   flexDirection: string;
 };
 
@@ -54,9 +58,24 @@ export const Flex = ({
     </x.div>
   );
 };
-function toFlexValues(alignV?: AlignmentValues): string | undefined {
-  if (!alignV) return undefined;
-  switch (alignV) {
+function toFlexValues(
+  align?: AlignmentValue | AlignmentConfiguration
+): string | { [key: string]: string } | undefined {
+  if (!align) return undefined;
+  if (typeof align === "object") {
+    const responsiveFlexObject: { [key: string]: string } = {};
+    Object.keys(align).forEach(k => {
+      const key = k as keyof AlignmentConfiguration;
+      const value = align[key]!;
+      responsiveFlexObject[key] = ToFlexValue(value);
+    });
+    return responsiveFlexObject;
+  }
+  return ToFlexValue(align);
+}
+
+const ToFlexValue = (align: AlignmentValue) => {
+  switch (align) {
     case "start":
       return "flex-start";
     case "center":
@@ -68,4 +87,4 @@ function toFlexValues(alignV?: AlignmentValues): string | undefined {
     case "around":
       return "space-around";
   }
-}
+};

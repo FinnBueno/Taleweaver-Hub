@@ -1,6 +1,17 @@
-import { x } from "@xstyled/styled-components";
-import { PropsWithChildren } from "react";
+import { WithChildren } from "@src/utils/children";
+import {
+  SpaceProps,
+  ColorProps,
+  x,
+  FontSizeProps,
+} from "@xstyled/styled-components";
 
-export const Paragraph = ({ children }: PropsWithChildren) => {
-  return <x.p color="text">{children}</x.p>;
+type Props = SpaceProps & ColorProps & FontSizeProps;
+
+export const Paragraph = ({ children, ...props }: WithChildren<Props>) => {
+  return (
+    <x.p color="text" {...props}>
+      {children}
+    </x.p>
+  );
 };
